@@ -63,7 +63,7 @@ public class BulletinE2ETest {
                     String libelle = (i < 2 ? "Devoir " + (i + 1) : "Examen");
                     Evaluation.TypeEvaluation type = (i < 2) ? Evaluation.TypeEvaluation.DEVOIR : Evaluation.TypeEvaluation.EXAMEN;
                     Evaluation ev = evalDao.create(new Evaluation(null, libelle, type,
-                        LocalDate.of(2024, 9 + i * 2, 15), e.id()));
+                        LocalDate.of(2024, new int[]{9, 11, 12}[i], 15), e.id()));
                     evalCount++;
                     List<Etudiant> ets = etudiants;
                     for (int j = 0; j < ets.size() && j < 5; j++) {
