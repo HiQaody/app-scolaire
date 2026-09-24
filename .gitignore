@@ -1,0 +1,28 @@
+# Maven build output
+target/
+
+# Java bytecode and packaged archives
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE configuration
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.bak
