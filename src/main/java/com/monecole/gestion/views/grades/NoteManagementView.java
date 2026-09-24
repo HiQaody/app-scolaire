@@ -57,9 +57,9 @@ public class NoteManagementView extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         add(buildHeader(), BorderLayout.NORTH);
-        add(buildToolbar(), BorderLayout.WEST);
         add(buildTableWrapper(), BorderLayout.CENTER);
         add(buildFooter(), BorderLayout.SOUTH);
+        add(buildToolbar(), BorderLayout.WEST);
     }
 
     private JPanel buildHeader() {
