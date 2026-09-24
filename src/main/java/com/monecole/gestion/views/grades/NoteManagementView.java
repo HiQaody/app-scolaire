@@ -383,7 +383,7 @@ public class NoteManagementView extends JPanel {
             }
         }
         @Override public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
+                boolean isSelected, int row, int column) {
             field.setText(value == null ? "" : value.toString());
             return field;
         }

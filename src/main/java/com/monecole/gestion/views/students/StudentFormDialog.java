@@ -28,7 +28,7 @@ public class StudentFormDialog extends JDialog {
     private final JTextField prenomField = new JTextField(15);
     private final JTextField dateField = new JTextField(15);
     private final JComboBox<Etudiant.Sexe> sexeCombo;
-    private final JComboBox<Classe> classeCombo;
+    private JComboBox<Classe> classeCombo;
     private final EtudiantDao etudiantDao;
     private final boolean isEdit;
     private Long studentId;

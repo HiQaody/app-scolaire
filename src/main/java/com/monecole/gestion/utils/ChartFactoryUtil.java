@@ -9,7 +9,7 @@ import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultKeyedValuesDataset;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleEdge;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public final class ChartFactoryUtil {
      * Crée un graphique en camembert (pie chart) de la répartition des mentions.
      */
     public static ChartPanel createMentionPieChart(Map<MoyenneService.Mention, Integer> repartition, String title) {
-        DefaultKeyedValuesDataset<String, Number> dataset = new DefaultKeyedValuesDataset<>();
+        DefaultKeyedValuesDataset dataset = new DefaultKeyedValuesDataset();
         for (var entry : repartition.entrySet()) {
             if (entry.getValue() > 0) {
                 dataset.setValue(entry.getKey().getLabel(), entry.getValue());

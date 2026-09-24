@@ -58,7 +58,7 @@ public class DashboardView extends JPanel {
 
     private void loadDashboardData() {
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
-            private int etudiants, classes, matieres, enseignants;
+            private int etudiants, classes, matieres, enseignants, enseignements, evaluations;
             private AnneeScolaire activeYear;
             private Classe firstClasse;
 
@@ -69,6 +69,8 @@ public class DashboardView extends JPanel {
                 classes = (int) df.getClasseDao().count();
                 matieres = (int) df.getMatiereDao().count();
                 enseignants = (int) df.getEnseignantDao().count();
+                enseignements = (int) df.getEnseignementDao().count();
+                evaluations = (int) df.getEvaluationDao().count();
                 activeYear = df.getAnneeScolaireDao().findActive();
 
                 List<Classe> allClasses = df.getClasseDao().findAll();
@@ -82,7 +84,7 @@ public class DashboardView extends JPanel {
             protected void done() {
                 try {
                     get();
-                    buildStatCards(etudiants, classes, matieres, enseignants, activeYear);
+                    buildStatCards(etudiants, classes, matieres, enseignants, enseignements, evaluations, activeYear);
                     buildCharts(firstClasse);
                 } catch (Exception e) {
                     LOGGER.log(Level.SEVERE, "Erreur chargement dashboard", e);
@@ -92,7 +94,8 @@ public class DashboardView extends JPanel {
         worker.execute();
     }
 
-    private void buildStatCards(int etudiants, int classes, int matieres, int enseignants, AnneeScolaire activeYear) {
+    private void buildStatCards(int etudiants, int classes, int matieres, int enseignants,
+            int enseignements, int evaluations, AnneeScolaire activeYear) {
         statsContainer.removeAll();
         statsContainer.add(buildStatCard("Étudiants", String.valueOf(etudiants)));
         statsContainer.add(buildStatCard("Classes", String.valueOf(classes)));
@@ -107,8 +110,8 @@ public class DashboardView extends JPanel {
         } catch (Exception e) {
             statsContainer.add(buildStatCard("Utilisateurs", "—"));
         }
-        statsContainer.add(buildStatCard("Enseignements", String.valueOf(DaoFactory.getInstance().getEnseignementDao().count())));
-        statsContainer.add(buildStatCard("Évaluations", String.valueOf(DaoFactory.getInstance().getEvaluationDao().count())));
+        statsContainer.add(buildStatCard("Enseignements", String.valueOf(enseignements)));
+        statsContainer.add(buildStatCard("Évaluations", String.valueOf(evaluations)));
 
         statsContainer.revalidate();
         statsContainer.repaint();
