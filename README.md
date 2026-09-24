@@ -11,7 +11,7 @@ Application desktop autonome (hors-ligne) de gestion scolaire, développée en J
 | UI | Swing + FlatLaf (Light/Dark) + MigLayout |
 | Base de données | SQLite 3 (JDBC pur) |
 | Graphiques | JFreeChart |
-| Rapports PDF | JasperReports |
+| Rapports PDF | JasperReports 6.21 (template `src/main/resources/reports/bulletin.jrxml`) |
 
 ## Architecture
 
@@ -28,7 +28,7 @@ src/main/java/com/monecole/gestion/
 │   └── DatabaseBackupUtil.java
 ├── services/                # Logique métier (AuthService)
 ├── utils/                   # PasswordHasher, DatabaseSeeder
-└── views/                   # Interfaces graphiques (à venir Sprint 2+)
+└── views/                   # Interfaces graphiques (Login, MainWindow, CRUD, Notes, Dashboard)
 ```
 
 ## Installation & Exécution
@@ -77,7 +77,7 @@ mvn clean package
 | Sprint | Fonctionnalités | Statut |
 |--------|----------------|--------|
 | 1 | Config Maven, FlatLaf, BDD SQLite, couche DAO, auth, données test | ✅ Terminé |
-| 2 | Interfaces (Login, menu latéral, CRUD Étudiants/Classes) | 🔲 À faire |
-| 3 | Module Pédagogique (Matières) + saisie notes (JTable) | 🔲 À faire |
-| 4 | Calculs de moyennes + JFreeChart (dashboard) | 🔲 À faire |
-| 5 | JasperReports (PDF bulletins) + packaging jpackage | 🔲 À faire |
+| 2 | Interfaces (Login, menu latéral, CRUD Étudiants/Classes) | ✅ Terminé |
+| 3 | Module Pédagogique (Matières) + saisie notes (JTable) | ✅ Terminé |
+| 4 | Calculs de moyennes + JFreeChart (dashboard) | ✅ Terminé |
+| 5 | JasperReports (PDF bulletins) + packaging jpackage | ✅ Terminé (bulletins PDF ; jpackage optionnel à venir) |

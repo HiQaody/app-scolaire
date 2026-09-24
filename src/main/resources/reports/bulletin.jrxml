@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Template JasperReports : Bulletin de notes
+  Données : JRBeanCollectionDataSource de BulletinLigneMatiere (matiere, coefficient, moyenneMatiere, mentionMatiere)
+  En-tête : passé en paramètres depuis BulletinService.
+-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="bulletin"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="515"
+              leftMargin="40"
+              rightMargin="40"
+              topMargin="40"
+              bottomMargin="60">
+
+    <style name="Titre" isDefault="false" forecolor="#1E3A5F" fontSize="18" isBold="true"/>
+    <style name="SousTitre" isDefault="false" forecolor="#444444" fontSize="11"/>
+    <style name="EnteteTable" isDefault="false" mode="Opaque" backcolor="#1E3A5F" forecolor="#FFFFFF" fontSize="10" isBold="true"/>
+    <style name="Cellule" isDefault="false" fontSize="10"/>
+    <style name="Total" isDefault="false" fontSize="11" isBold="true"/>
+
+    <parameter name="etablissement" class="java.lang.String"/>
+    <parameter name="anneeScolaire" class="java.lang.String"/>
+    <parameter name="trimestre" class="java.lang.String"/>
+    <parameter name="matricule" class="java.lang.String"/>
+    <parameter name="nom" class="java.lang.String"/>
+    <parameter name="prenom" class="java.lang.String"/>
+    <parameter name="classe" class="java.lang.String"/>
+    <parameter name="niveau" class="java.lang.String"/>
+    <parameter name="moyenneGenerale" class="java.lang.String"/>
+    <parameter name="rang" class="java.lang.String"/>
+    <parameter name="mention" class="java.lang.String"/>
+    <parameter name="effectif" class="java.lang.String"/>
+    <parameter name="moyenneClasse" class="java.lang.String"/>
+
+    <field name="matiere" class="java.lang.String"/>
+    <field name="coefficient" class="java.lang.Double"/>
+    <field name="moyenneMatiere" class="java.lang.String"/>
+    <field name="mentionMatiere" class="java.lang.String"/>
+
+    <title>
+        <band height="130">
+            <staticText>
+                <reportElement x="0" y="10" width="515" height="30" style="Titre"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[BULLETIN DE NOTES]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="42" width="515" height="20" style="SousTitre"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$P{etablissement}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="62" width="515" height="18" style="SousTitre"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Année scolaire : " + $P{anneeScolaire} + "   —   " + $P{trimestre}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="0" y="92" width="515" height="1"/>
+            </line>
+            <textField>
+                <reportElement x="0" y="100" width="255" height="18" style="Cellule"/>
+                <textFieldExpression><![CDATA["Élève : " + $P{nom} + " " + $P{prenom}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="255" y="100" width="260" height="18" style="Cellule"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Matricule : " + $P{matricule}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="118" width="255" height="12"/>
+                <textFieldExpression><![CDATA["Classe : " + $P{classe} + " (" + $P{niveau} + ")"]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="24">
+            <staticText>
+                <reportElement x="0" y="0" width="215" height="22" style="EnteteTable" mode="Opaque"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Matière]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="215" y="0" width="80" height="22" style="EnteteTable" mode="Opaque"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Coef.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="295" y="0" width="110" height="22" style="EnteteTable" mode="Opaque"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Moyenne /20]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="405" y="0" width="110" height="22" style="EnteteTable" mode="Opaque"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Appréciation]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="22">
+            <textField isBlankWhenNull="true">
+                <reportElement x="0" y="0" width="215" height="20" style="Cellule"/>
+                <box leftPadding="4"><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{matiere}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="215" y="0" width="80" height="20" style="Cellule"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{coefficient} == null ? "—" : String.valueOf($F{coefficient})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="295" y="0" width="110" height="20" style="Cellule"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{moyenneMatiere}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="405" y="0" width="110" height="20" style="Cellule"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{mentionMatiere}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <summary>
+        <band height="200">
+            <line>
+                <reportElement x="0" y="4" width="515" height="1"/>
+            </line>
+            <textField>
+                <reportElement x="0" y="12" width="515" height="20" style="Total"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Moyenne générale : " + $P{moyenneGenerale} + " / 20"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="34" width="255" height="18" style="Cellule"/>
+                <textFieldExpression><![CDATA["Rang : " + $P{rang} + " / " + $P{effectif}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="255" y="34" width="260" height="18" style="Cellule"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Moyenne de la classe : " + $P{moyenneClasse} + " / 20"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="54" width="515" height="20" style="Total" forecolor="#28A745"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Mention : " + $P{mention}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="100" width="180" height="16" style="Cellule"/>
+                <text><![CDATA[Signature du Parent / Tuteur]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="335" y="100" width="180" height="16" style="Cellule"/>
+                <text><![CDATA[Le Chef d'établissement]]></text>
+            </staticText>
+            <line>
+                <reportElement x="40" y="160" width="120" height="1"/>
+            </line>
+            <line>
+                <reportElement x="355" y="160" width="120" height="1"/>
+            </line>
+            <staticText>
+                <reportElement x="0" y="170" width="515" height="14" forecolor="#888888"/>
+                <textElement textAlignment="Center"><font size="8"/></textElement>
+                <text><![CDATA[Document généré automatiquement — Application de Gestion Scolaire]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

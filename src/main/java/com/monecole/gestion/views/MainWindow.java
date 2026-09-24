@@ -9,6 +9,7 @@ import com.monecole.gestion.views.enseignants.EnseignantManagementView;
 import com.monecole.gestion.views.enseignements.EnseignementManagementView;
 import com.monecole.gestion.views.grades.NoteManagementView;
 import com.monecole.gestion.views.matieres.MatiereManagementView;
+import com.monecole.gestion.views.reports.BulletinView;
 import com.monecole.gestion.views.students.StudentManagementView;
 
 import javax.swing.*;
@@ -136,7 +137,7 @@ public class MainWindow extends JFrame {
         workspacePanel.add(new EnseignantManagementView(), "enseignants");
         workspacePanel.add(new EnseignementManagementView(), "enseignements");
         workspacePanel.add(new NoteManagementView(), "grades");
-        workspacePanel.add(Box.createHorizontalStrut(400), "reports");
+        workspacePanel.add(new BulletinView(), "reports");
         workspacePanel.add(Box.createHorizontalStrut(400), "stats");
         return workspacePanel;
     }
