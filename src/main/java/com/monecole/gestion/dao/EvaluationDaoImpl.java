@@ -12,13 +12,18 @@ import java.util.List;
  */
 public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements EvaluationDao {
 
+    /** Projection commune à toutes les requêtes de lecture. */
+    private static final String COLONNES =
+        "id, libelle, type, date, id_enseignement, poids, bareme";
+
     public EvaluationDaoImpl(DaoFactory daoFactory) {
         super(daoFactory);
     }
 
     @Override
     protected String getInsertSql() {
-        return "INSERT INTO evaluations (libelle, type, date, id_enseignement) VALUES (?, ?, ?, ?)";
+        return "INSERT INTO evaluations (libelle, type, date, id_enseignement, poids, bareme) "
+            + "VALUES (?, ?, ?, ?, ?, ?)";
     }
 
     @Override
@@ -27,21 +32,24 @@ public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements 
         ps.setString(2, ev.type().name());
         ps.setObject(3, ev.date());
         ps.setLong(4, ev.idEnseignement());
+        ps.setDouble(5, ev.poids());
+        ps.setDouble(6, ev.bareme());
     }
 
     @Override
     protected String getFindByIdSql() {
-        return "SELECT id, libelle, type, date, id_enseignement FROM evaluations WHERE id = ?";
+        return "SELECT " + COLONNES + " FROM evaluations WHERE id = ?";
     }
 
     @Override
     protected String getFindAllSql() {
-        return "SELECT id, libelle, type, date, id_enseignement FROM evaluations";
+        return "SELECT " + COLONNES + " FROM evaluations ORDER BY date, id";
     }
 
     @Override
     protected String getUpdateSql() {
-        return "UPDATE evaluations SET libelle = ?, type = ?, date = ?, id_enseignement = ? WHERE id = ?";
+        return "UPDATE evaluations SET libelle = ?, type = ?, date = ?, id_enseignement = ?, "
+            + "poids = ?, bareme = ? WHERE id = ?";
     }
 
     @Override
@@ -50,7 +58,9 @@ public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements 
         ps.setString(2, ev.type().name());
         ps.setObject(3, ev.date());
         ps.setLong(4, ev.idEnseignement());
-        ps.setLong(5, ev.id());
+        ps.setDouble(5, ev.poids());
+        ps.setDouble(6, ev.bareme());
+        ps.setLong(7, ev.id());
     }
 
     @Override
@@ -65,7 +75,8 @@ public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements 
 
     @Override
     protected Evaluation copyWithId(Evaluation ev, Long id) {
-        return new Evaluation(id, ev.libelle(), ev.type(), ev.date(), ev.idEnseignement());
+        return new Evaluation(id, ev.libelle(), ev.type(), ev.date(), ev.idEnseignement(),
+            ev.poids(), ev.bareme());
     }
 
     @Override
@@ -75,13 +86,16 @@ public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements 
             rs.getString("libelle"),
             Evaluation.TypeEvaluation.fromValue(rs.getString("type")),
             rs.getObject("date") != null ? rs.getObject("date", LocalDate.class) : null,
-            rs.getLong("id_enseignement")
+            rs.getLong("id_enseignement"),
+            rs.getDouble("poids"),
+            rs.getDouble("bareme")
         );
     }
 
     @Override
     public List<Evaluation> findByIdEnseignement(Long idEnseignement) throws Exception {
-        String sql = "SELECT id, libelle, type, date, id_enseignement FROM evaluations WHERE id_enseignement = ?";
+        String sql = "SELECT " + COLONNES
+            + " FROM evaluations WHERE id_enseignement = ? ORDER BY date, id";
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, idEnseignement);
             try (ResultSet rs = ps.executeQuery()) {
@@ -93,14 +107,49 @@ public class EvaluationDaoImpl extends AbstractDao<Evaluation, Long> implements 
     @Override
     public List<Evaluation> findByIdClasseAndMatiere(Long idClasse, Long idMatiere) throws Exception {
         String sql = """
-            SELECT ev.id, ev.libelle, ev.type, ev.date, ev.id_enseignement
+            SELECT ev.id, ev.libelle, ev.type, ev.date, ev.id_enseignement, ev.poids, ev.bareme
             FROM evaluations ev
             JOIN enseignements e ON ev.id_enseignement = e.id
             WHERE e.id_classe = ? AND e.id_matiere = ?
+            ORDER BY ev.date, ev.id
             """;
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, idClasse);
             ps.setLong(2, idMatiere);
+            try (ResultSet rs = ps.executeQuery()) {
+                return extractList(rs);
+            }
+        }
+    }
+
+    @Override
+    public List<Evaluation> findByIdClasse(Long idClasse) throws Exception {
+        String sql = """
+            SELECT ev.id, ev.libelle, ev.type, ev.date, ev.id_enseignement, ev.poids, ev.bareme
+            FROM evaluations ev
+            JOIN enseignements e ON ev.id_enseignement = e.id
+            WHERE e.id_classe = ?
+            ORDER BY ev.date, ev.id
+            """;
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, idClasse);
+            try (ResultSet rs = ps.executeQuery()) {
+                return extractList(rs);
+            }
+        }
+    }
+
+    @Override
+    public List<Evaluation> findByIdEnseignant(Long idEnseignant) throws Exception {
+        String sql = """
+            SELECT ev.id, ev.libelle, ev.type, ev.date, ev.id_enseignement, ev.poids, ev.bareme
+            FROM evaluations ev
+            JOIN enseignements e ON ev.id_enseignement = e.id
+            WHERE e.id_enseignant = ?
+            ORDER BY ev.date DESC, ev.id DESC
+            """;
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, idEnseignant);
             try (ResultSet rs = ps.executeQuery()) {
                 return extractList(rs);
             }

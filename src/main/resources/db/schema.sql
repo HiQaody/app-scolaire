@@ -76,6 +76,8 @@ CREATE TABLE IF NOT EXISTS evaluations (
     type            TEXT NOT NULL CHECK (type IN ('DEVOIR', 'EXAMEN', 'PROJECT', 'PARTICIPATION')),
     date            DATE,
     id_enseignement INTEGER NOT NULL,
+    poids           REAL NOT NULL DEFAULT 1,
+    bareme          REAL NOT NULL DEFAULT 20,
     FOREIGN KEY (id_enseignement) REFERENCES enseignements(id) ON DELETE CASCADE
 );
 

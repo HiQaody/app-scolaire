@@ -33,13 +33,6 @@
             <version>3.45.1.0</version>
         </dependency>
 
-        <!-- JFreeChart pour les graphiques -->
-        <dependency>
-            <groupId>org.jfree</groupId>
-            <artifactId>jfreechart</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-
         <!-- JasperReports pour les PDF -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
@@ -47,7 +40,7 @@
             <version>6.21.0</version>
         </dependency>
 
-        <!-- MigLayout (Optionnel mais recommandé pour un meilleur layout Swing) -->
+        <!-- MigLayout (Optionnel mais recommande pour un meilleur layout Swing) -->
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>

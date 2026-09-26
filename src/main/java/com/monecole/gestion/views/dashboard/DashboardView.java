@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * Vue du tableau de bord (Dashboard).
- * Affiche des statistiques et graphiques JFreeChart.
+ * Affiche des statistiques et des graphiques dessines entierement en Swing.
  */
 public class DashboardView extends JPanel {
 
@@ -84,7 +84,8 @@ public class DashboardView extends JPanel {
             protected void done() {
                 try {
                     get();
-                    buildStatCards(etudiants, classes, matieres, enseignants, enseignements, evaluations, activeYear);
+                    buildStatCards(etudiants, classes, matieres, enseignants,
+                        enseignements, evaluations, activeYear);
                     buildCharts(firstClasse);
                 } catch (Exception e) {
                     LOGGER.log(Level.SEVERE, "Erreur chargement dashboard", e);
@@ -94,8 +95,9 @@ public class DashboardView extends JPanel {
         worker.execute();
     }
 
-    private void buildStatCards(int etudiants, int classes, int matieres, int enseignants,
-            int enseignements, int evaluations, AnneeScolaire activeYear) {
+    private void buildStatCards(int etudiants, int classes, int matieres,
+            int enseignants, int enseignements, int evaluations,
+            AnneeScolaire activeYear) {
         statsContainer.removeAll();
         statsContainer.add(buildStatCard("Étudiants", String.valueOf(etudiants)));
         statsContainer.add(buildStatCard("Classes", String.valueOf(classes)));
@@ -133,7 +135,8 @@ public class DashboardView extends JPanel {
                     moyennesParMatiere = moyenneService.moyennesParMatiere(classe.id());
                     double taux = moyenneService.tauxReussite(classe.id());
                     SwingUtilities.invokeLater(() ->
-                        tauxReussiteLabel.setText(String.format("Taux de réussite : %.1f%%", taux * 100)));
+                        tauxReussiteLabel.setText(String.format(
+                            "Taux de réussite : %.1f%%", taux * 100)));
                     return null;
                 }
 
@@ -141,10 +144,14 @@ public class DashboardView extends JPanel {
                 protected void done() {
                     try {
                         get();
-                        chartsContainer.add(com.monecole.gestion.utils.ChartFactoryUtil.createMentionPieChart(
-                            repartition, "Répartition des mentions — " + classe.nom()));
-                        chartsContainer.add(com.monecole.gestion.utils.ChartFactoryUtil.createMatiereBarChart(
-                            moyennesParMatiere, "Moyennes par matière — " + classe.nom()));
+                        PieChartPanel pie = new PieChartPanel(
+                            "Répartition des mentions — " + classe.nom());
+                        pie.setData(repartition);
+                        chartsContainer.add(pie);
+                        BarChartPanel bar = new BarChartPanel(
+                            "Moyennes par matière — " + classe.nom());
+                        bar.setData(moyennesParMatiere);
+                        chartsContainer.add(bar);
                         chartsContainer.revalidate();
                         chartsContainer.repaint();
                     } catch (Exception e) {

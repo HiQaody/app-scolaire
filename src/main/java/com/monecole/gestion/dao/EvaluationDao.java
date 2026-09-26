@@ -13,4 +13,10 @@ import java.util.List;
 public interface EvaluationDao extends GenericDao<Evaluation, Long> {
     List<Evaluation> findByIdEnseignement(Long idEnseignement) throws Exception;
     List<Evaluation> findByIdClasseAndMatiere(Long idClasse, Long idMatiere) throws Exception;
+
+    /** Toutes les évaluations d'une classe, tous enseignements confondus. */
+    List<Evaluation> findByIdClasse(Long idClasse) throws Exception;
+
+    /** Toutes les évaluations d'un enseignant, de la plus récente à la plus ancienne. */
+    List<Evaluation> findByIdEnseignant(Long idEnseignant) throws Exception;
 }

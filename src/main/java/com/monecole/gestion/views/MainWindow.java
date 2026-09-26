@@ -136,7 +136,7 @@ public class MainWindow extends JFrame {
         workspacePanel.add(new MatiereManagementView(), "matieres");
         workspacePanel.add(new EnseignantManagementView(), "enseignants");
         workspacePanel.add(new EnseignementManagementView(), "enseignements");
-        workspacePanel.add(new NoteManagementView(), "grades");
+        workspacePanel.add(new NoteManagementView(currentUser), "grades");
         workspacePanel.add(new BulletinView(), "reports");
         workspacePanel.add(Box.createHorizontalStrut(400), "stats");
         return workspacePanel;

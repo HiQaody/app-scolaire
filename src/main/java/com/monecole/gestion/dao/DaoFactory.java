@@ -61,6 +61,8 @@ public class DaoFactory {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(DB_URL);
             connection.createStatement().execute("PRAGMA foreign_keys = ON");
+            // Les bases créées avant une évolution de schéma doivent être mises à niveau.
+            com.monecole.gestion.utils.DatabaseMigration.apply(connection);
         }
         return connection;
     }
