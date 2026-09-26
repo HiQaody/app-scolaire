@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <properties>
+    <property name="formContentPane" type="java.lang.String">
+      <value/>
+    </property>
+  </properties>
+  <component name="Form" type="com.monecole.gestion.views.classes.ClassFormDialog" max="false" maxX="false" maxY="false">
+    <properties>
+      <property name="title" type="java.lang.String">
+        <value>Nouvelle classe</value>
+      </property>
+    </properties>
+    <component name="contentPane" type="javax.swing.JPanel">
+      <layout class="java.awt.BorderLayout">
+        <property name="vgap" type="int">
+          <value>10</value>
+        </property>
+        <property name="hgap" type="int">
+          <value>10</value>
+        </property>
+        <component name="formPanel" class="javax.swing.JPanel" min="false" max="false" maxX="true" maxY="true">
+          <properties>
+            <property name="border" type="javax.swing.border.EmptyBorder">
+              <value>
+                <emptyBorder top="10" left="10" bottom="10" right="10"/>
+              </value>
+            </property>
+          </properties>
+          <layout class="java.awt.GridBagLayout">
+            <rows>
+              <row weight="0.0">
+                <component name="nomLabel" class="javax.swing.JLabel" min="false" max="false" maxX="false" maxY="false">
+                  <properties>
+                    <property name="text" type="java.lang.String">
+                      <value>Nom :</value>
+                    </property>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>0</int>
+                          <int>0</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>0</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>0</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+                <component name="nomField" class="javax.swing.JTextField" min="false" max="false" maxX="true" maxY="false">
+                  <properties>
+                    <property name="columns" type="int">
+                      <value>15</value>
+                    </property>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>1</int>
+                          <int>0</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>1</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>0</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+              </row>
+              <row weight="0.0">
+                <component name="niveauLabel" class="javax.swing.JLabel" min="false" max="false" maxX="false" maxY="false">
+                  <properties>
+                    <property name="text" type="java.lang.String">
+                      <value>Niveau :</value>
+                    </property>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>0</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>0</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>1</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+                <component name="niveauField" class="javax.swing.JTextField" min="false" max="false" maxX="true" maxY="false">
+                  <properties>
+                    <property name="columns" type="int">
+                      <value>15</value>
+                    </property>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>1</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>1</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>1</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+              </row>
+              <row weight="0.0">
+                <component name="anneeLabel" class="javax.swing.JLabel" min="false" max="false" maxX="false" maxY="false">
+                  <properties>
+                    <property name="text" type="java.lang.String">
+                      <value>Année scolaire :</value>
+                    </property>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>0</int>
+                          <int>2</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>0</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>2</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+                <component name="anneeCombo" class="javax.swing.JComboBox" min="false" max="false" maxX="true" maxY="false">
+                  <properties>
+                    <property name="anchor" type="java.awt.GridBagConstraints">
+                      <value>
+                        <object class="java.awt.GridBagConstraints" method="getInstance">
+                          <int>1</int>
+                          <int>2</int>
+                          <int>1</int>
+                          <int>1</int>
+                          <double>0.0</double>
+                          <double>0.0</double>
+                          <int>17</int>
+                        </object>
+                      </value>
+                    </property>
+                    <property name="gridx" type="int">
+                      <value>1</value>
+                    </property>
+                    <property name="gridy" type="int">
+                      <value>2</value>
+                    </property>
+                    <property name="insets" type="java.awt.Insets">
+                      <value>
+                        <object class="java.awt.Insets" method="getInstance">
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                          <int>5</int>
+                        </object>
+                      </value>
+                    </property>
+                  </properties>
+                </component>
+              </row>
+            </rows>
+          </layout>
+        </component>
+        <component name="buttonPanel" class="javax.swing.JPanel" min="false" max="false" maxX="true" minY="true">
+          <properties>
+            <property name="layout" type="java.awt.FlowLayout">
+              <value>
+                <item type="java.awt.FlowLayout" method="setAlignment">
+                  <int>2</int>
+                </item>
+              </value>
+            </property>
+          </properties>
+          <component name="okButton" class="javax.swing.JButton" min="false" max="false" maxX="true" maxY="false">
+            <properties>
+              <property name="text" type="java.lang.String">
+                <value>Créer</value>
+              </property>
+              <property name="focusPainted" type="boolean">
+                <value>false</value>
+              </property>
+            </properties>
+          </component>
+          <component name="cancelButton" class="javax.swing.JButton" min="false" max="false" maxX="true" maxY="false">
+            <properties>
+              <property name="text" type="java.lang.String">
+                <value>Annuler</value>
+              </property>
+              <property name="focusPainted" type="boolean">
+                <value>false</value>
+              </property>
+            </properties>
+          </component>
+        </component>
+      </layout>
+    </component>
+  </component>
+</form>

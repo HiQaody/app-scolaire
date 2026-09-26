@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <properties>
+    <property name="formContentPane" type="java.lang.String">
+      <value/>
+    </property>
+  </properties>
+  <component name="Form" type="com.monecole.gestion.views.dashboard.DashboardView" max="false" maxX="false" maxY="false">
+    <properties>
+      <property name="border" type="javax.swing.border.EmptyBorder">
+        <value>
+          <emptyBorder top="0" left="0" bottom="0" right="0"/>
+        </value>
+      </property>
+      <property name="layout" type="java.awt.BorderLayout">
+        <value>
+          <item type="java.awt.BorderLayout" method="setHgap">
+            <int>10</int>
+          </item>
+          <item type="java.awt.BorderLayout" method="setVgap">
+            <int>10</int>
+          </item>
+        </value>
+      </property>
+    </properties>
+  </component>
+</form>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <properties>
+    <property name="formContentPane" type="java.lang.String">
+      <value/>
+    </property>
+  </properties>
+  <component name="Form" type="com.monecole.gestion.views.dashboard.BarChartPanel" max="false" maxX="false" maxY="false">
+    <properties>
+      <property name="border" type="javax.swing.border.EmptyBorder">
+        <value>
+          <emptyBorder top="0" left="0" bottom="0" right="0"/>
+        </value>
+      </property>
+      <property name="layout" type="java.awt.FlowLayout">
+        <value>
+          <item type="java.awt.FlowLayout" method="setHgap">
+            <int>5</int>
+          </item>
+          <item type="java.awt.FlowLayout" method="setVgap">
+            <int>5</int>
+          </item>
+        </value>
+      </property>
+      <property name="preferredSize" type="java.awt.Dimension">
+        <value>
+          <width>420</width>
+          <height>300</height>
+        </value>
+      </property>
+    </properties>
+  </component>
+</form>

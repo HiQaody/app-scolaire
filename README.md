@@ -10,7 +10,7 @@ Application desktop autonome (hors-ligne) de gestion scolaire, développée en J
 | Build | Maven |
 | UI | Swing + FlatLaf (Light/Dark) + MigLayout |
 | Base de données | SQLite 3 (JDBC pur) |
-| Graphiques | JFreeChart |
+| Graphiques | Custom Java 2D (Graphics2D) — BarChartPanel, PieChartPanel |
 | Rapports PDF | JasperReports 6.21 (template `src/main/resources/reports/bulletin.jrxml`) |
 
 ## Architecture
@@ -18,7 +18,18 @@ Application desktop autonome (hors-ligne) de gestion scolaire, développée en J
 ```
 src/main/java/com/monecole/gestion/
 ├── main/                    # Point d'entrée (MainApp, LoginPanel)
+├── controllers/             # Contrôleurs Swing (ActionListeners, liaison Vue/Service)
 ├── models/                  # Entités (Records Java 21)
+│   ├── AnneeScolaire.java
+│   ├── Classe.java
+│   ├── Enseignant.java
+│   ├── Enseignement.java
+│   ├── Etudiant.java
+│   ├── Evaluation.java
+│   ├── Matiere.java
+│   ├── Note.java
+│   ├── NoteDetail.java
+│   └── Utilisateur.java
 ├── dao/                     # Interfaces + implémentations JDBC (pattern DAO)
 │   ├── DaoFactory.java      # Singleton de connexion SQLite
 │   ├── GenericDao.java      # Interface CRUD générique
@@ -26,9 +37,28 @@ src/main/java/com/monecole/gestion/
 │   ├── *Dao.java            # Interfaces spécifiques
 │   ├── *DaoImpl.java        # Implémentations JDBC
 │   └── DatabaseBackupUtil.java
-├── services/                # Logique métier (AuthService)
-├── utils/                   # PasswordHasher, DatabaseSeeder
-└── views/                   # Interfaces graphiques (Login, MainWindow, CRUD, Notes, Dashboard)
+├── services/                # Logique métier
+│   ├── AuthService.java
+│   ├── BulletinService.java
+│   ├── EtudiantService.java
+│   ├── MoyenneService.java
+│   └── NoteService.java
+├── utils/                   # Utilitaires
+│   ├── DatabaseMigration.java
+│   ├── DatabaseSeeder.java
+│   └── PasswordHasher.java
+└── views/                   # Interfaces graphiques
+    ├── MainWindow.java
+    ├── classes/             # Gestion des classes
+    ├── dashboard/           # Tableau de bord (graphiques 2D custom)
+    ├── enseignants/         # Gestion des enseignants
+    ├── enseignements/       # Gestion des enseignements
+    ├── grades/              # Notes, évaluations, statistiques, synthèse
+    ├── matieres/            # Gestion des matières
+    ├── reports/             # Visualisation des bulletins PDF
+    └── students/            # Gestion des étudiants
+src/test/java/               # Tests E2E
+└── BulletinE2ETest.java     # Test end-to-end de génération de bulletins
 ```
 
 ## Installation & Exécution
@@ -57,7 +87,8 @@ mvn clean package
 
 - **Emplacement :** `~/Library/Application Support/.ecole-gestion/ecole.db` (macOS) ou `%USERPROFILE%\.ecole-gestion\ecole.db` (Windows)
 - **Initialisation :** Création automatique à la première exécution via `schema.sql`
-- **Données de test :** Insérées automatiquement si la base est vide
+- **Migrations :** Appliquées automatiquement par `DatabaseMigration` (ajout de colonnes `poids`, `bareme` sur `evaluations`)
+- **Données de test :** Insérées automatiquement si la base est vide via `DatabaseSeeder`
 
 ### Comptes de test
 | Login | Mot de passe | Rôle |
@@ -72,6 +103,14 @@ mvn clean package
 # Copie ecole.db vers ~/.ecole-gestion/backups/ecole_backup_<timestamp>.db
 ```
 
+## Tests
+
+Un test E2E headless est disponible pour valider la génération de bulletins PDF :
+```bash
+# Exécuter le test E2E
+java -cp "target/gestion-scolaire-1.0.0-shaded.jar" com.monecole.gestion.utils.BulletinE2ETest
+```
+
 ## Fonctionnalités par Sprint
 
 | Sprint | Fonctionnalités | Statut |
@@ -79,5 +118,5 @@ mvn clean package
 | 1 | Config Maven, FlatLaf, BDD SQLite, couche DAO, auth, données test | ✅ Terminé |
 | 2 | Interfaces (Login, menu latéral, CRUD Étudiants/Classes) | ✅ Terminé |
 | 3 | Module Pédagogique (Matières) + saisie notes (JTable) | ✅ Terminé |
-| 4 | Calculs de moyennes + JFreeChart (dashboard) | ✅ Terminé |
-| 5 | JasperReports (PDF bulletins) + packaging jpackage | ✅ Terminé (bulletins PDF ; jpackage optionnel à venir) |
+| 4 | Calculs de moyennes + graphiques 2D custom (dashboard) | ✅ Terminé |
+| 5 | JasperReports (PDF bulletins) + tests E2E + packaging jpackage | ✅ Terminé (bulletins PDF, tests E2E ; jpackage optionnel à venir) |

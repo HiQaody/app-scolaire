@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <properties>
+    <property name="formContentPane" type="java.lang.String">
+      <value/>
+    </property>
+    <property name="formMenuBar" type="java.lang.String">
+      <value/>
+    </property>
+    <property name="formWindowClosing" type="java.lang.String">
+      <value/>
+    </property>
+  </properties>
+  <component name="Form" type="com.monecole.gestion.views.MainWindow" max="false" maxX="false" maxY="false">
+    <properties>
+      <property name="title" type="java.lang.String">
+        <value>Application de Gestion Scolaire</value>
+      </property>
+    </properties>
+    <component name="contentPane" type="javax.swing.JPanel">
+      <properties>
+        <property name="border" type="javax.swing.border.EmptyBorder">
+          <value>
+            <emptyBorder top="0" left="0" bottom="0" right="0"/>
+          </value>
+        </property>
+        <property name="layout" type="java.awt.BorderLayout"/>
+      </properties>
+    </component>
+  </component>
+</form>
